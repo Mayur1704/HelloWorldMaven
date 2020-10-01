@@ -10,19 +10,18 @@ pipeline {
             }
         stage('Test'){
             steps {
-                withMaven(maven : 'apache-maven-3.3.9'){
-                        bat "mvn test"
-                }
-
+                sh'''
+                mvn clean test
+                '''
             }
         }
         stage('Deploy') {
             steps {
-               withMaven(maven : 'apache-maven-3.3.9'){
-                        bat "mvn deploy"
-                }
+                sh'''
+                mvn clean package
+                '''
 
             }
         }
     }
-}
+	}
